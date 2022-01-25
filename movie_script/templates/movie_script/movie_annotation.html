@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+{% load custom_tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Script Annotation</title>
+    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+    <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
+    <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
+    <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+</head>
+
+<style>
+    .highlight {
+  background-color: yellow;
+}
+
+.unhighlight {
+  background-color: white;
+}
+
+p {
+  border: 1px solid;
+  font-size: 2em;
+  padding: .3em;
+}
+
+button {
+  font-size: 0.5em;
+  padding: .5em;
+  pointer-events: auto;
+  margin-top: 1em;
+}
+table,
+td {
+    border: 1px solid #333;
+    height: 50px;
+}
+
+thead,
+tfoot {
+    background-color: #4682B4;
+    color: #fff;
+}
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+</style>
+<script>
+
+$(function () {
+    var data_speech = {{ saved_script|safe }};
+    var inputText = document.getElementById("story");
+    var innerHTML = inputText.innerHTML;
+    for (i=0; i< data_speech.length; i++) {
+    var index = innerHTML.indexOf(data_speech[i]);
+    if (index >= 0) {
+        innerHTML = innerHTML.substring(0, index) + "<span class='highlight'>" + innerHTML.substring(index, index + data_speech[i].length) + "</span>" + innerHTML.substring(index + data_speech[i].length);
+        inputText.innerHTML = innerHTML;
+    }
+    }
+});
+</script>
+<body>
+        <div class="title_Div" style="background-color:royalblue; height:100px">
+            <h1 style="text-align: center; font-size: 50px">movie script annotation</h1>
+        </div>
+        <br>
+        <div class="row align-items-center">
+            <div class="col"></div>
+            <div class="col"><a href="{% url 'main'%}" style="font-weight: bolder;"><< movie list</a></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"><b>user ID:</b> <a>{{ user_id }}</a></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"><a href="{% url 'instructions'%}" onclick="centeredPopup(this.href,'myWindow','700','300','yes');return false">Instructions</a></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+            <a href="{% url 'logout'%}" style="font-weight: bolder;">logout</a>
+            </div>
+            <div class="col"></div>
+        </div>
+        <hr>
+        <br>
+  <div class="container-fluid" style="margin-top: 1rem">
+  <div class="row">
+    <div class="col" style="width:50%">
+        <h3 style="text-align: center" id="movie_name">{{ movie_name }}</h3>
+    <hr>
+        <label style="font-family: 'Arial Black'">Main characters: {% for i in characters %} {{ i }} {% endfor %} </label>
+
+                <pre readonly id="story" name="story" style="height: 70rem;width: 100%; overflow: auto; resize: vertical">
+{#                    {{ rawtext }}#}
+                    {% for i in rawtext %}
+<span>{{ i }}</span>
+                    {% endfor %}
+                </pre>
+
+    </div>
+      <div class="col"style="width:50%">
+          <h3 style="text-align: center;">Annotation</h3>
+          <hr>
+          <br>
+      <div id = "annotations" style="resize: vertical; overflow: auto;height: 70rem;">
+            <div id="0" class="row" hidden="true">
+    <div class="col" ><table style="width:100%">
+    <thead>
+        <tr>
+            <th >Speaker</th>
+            <th >Speech</th>
+            <th >Listener</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr valign="top">
+            <td style="width: 15%;">
+                <select class="form-control">
+                                <option disabled selected>Character</option>
+                    {% for c in characters %}
+                        <option>{{ c }}</option>
+                    {% endfor %}
+                </select></td>
+            <td style="width: 70%;"><form name="testform"><textarea style="width: 100%;"></textarea></form></td>
+            <td style="width: 15%;"><input></td>
+        </tr>
+    </tbody>
+</table></div>
+    <div class="w-100"></div>
+{#    <div class="col"><input value = "Load" class="btn btn-outline-info" type="button" id="load" onmousedown="getSelectedText()"></div>#}
+    <div class="col"><input value = "Load" type="button" id="load" onclick="copytext(this)"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"><button id="save" style="background-color:#2E8B57" onclick="saveclick(this)">
+        <span class="popup">Save<span class="popuptext" id="myPopup">저장되었습니다.</span></span>
+    </button>
+    </div>
+    <div class="col"><button id="delete" style="background-color:#B22222" onclick="remove(this)">Delete</button></div>
+    <div class="col"><button id="new" onclick="duplicate()" style="background-color:#6495ED">New</button></div>
+  </div>
+      {% for i in data_length %}
+                 <div id="{{ data.annotation_key|get_at_index:i }}" class="row">
+    <div class="col" ><table style="width:100%">
+    <thead>
+        <tr>
+            <th >Speaker</th>
+            <th >Speech</th>
+            <th >Listener</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr valign="top">
+            <td style="width: 15%;">
+                <select class="form-control">
+                                <option disabled selected>Character</option>
+                    {% for c in characters %}
+                        {% if c == data.speaker|get_at_index:i %}
+                        <option selected>{{ c }}</option>
+                        {% else %}
+                        <option>{{ c }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select></td>
+            <td style="width: 70%;"><form name="testform"><textarea style="width: 100%;">{{ data.speech|get_at_index:i }}</textarea></form></td>
+            <td style="width: 15%;"><input value="{{ data.listener|get_at_index:i  }}"></td>
+        </tr>
+    </tbody>
+</table></div>
+    <div class="w-100"></div>
+    <div class="col"><input value = "Load"  type="button" id="load" onclick="copytext(this)"></div>
+    <div class="col"><small>annotator:</small></div>
+    <div class="col"><small value = "{{ data.user_id|get_at_index:i }}"class="highlight">{{ data.user_id|get_at_index:i }}</small></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"><button id="save" style="background-color:#2E8B57" onclick="saveclick(this)">
+        <span class="popup">Save<span class="popuptext" id="myPopup">저장되었습니다.</span></span>
+    </button>
+    </div>
+    <div class="col"><button id="delete" style="background-color:#B22222" onclick="remove(this)">Delete</button></div>
+    <div class="col"><button id="new" onclick="duplicate()" style="background-color:#6495ED">New</button></div>
+  </div>
+        {% endfor %}
+
+        {% if not data_length %}
+            <div id="1" class="row">
+    <div class="col" ><table style="width:100%">
+    <thead>
+        <tr>
+            <th >Speaker</th>
+            <th >Speech</th>
+            <th >Listener</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr valign="top">
+            <td style="width: 15%;">
+                <select class="form-control">
+                                <option disabled selected>Character</option>
+                    {% for c in characters %}
+                        <option>{{ c }}</option>
+                    {% endfor %}
+                </select></td>
+            <td style="width: 70%;"><form name="testform"><textarea style="width: 100%;"></textarea></form></td>
+            <td style="width: 15%;"><input></td>
+        </tr>
+    </tbody>
+</table></div>
+    <div class="w-100"></div>
+    <div class="col"><input value = "Load"  type="button" id="load" onclick="copytext(this)"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"><button id="save" style="background-color:#2E8B57" onclick="saveclick(this)">
+        <span class="popup">Save<span class="popuptext" id="myPopup">저장되었습니다.</span></span>
+    </button>
+    </div>
+    <div class="col"><button id="delete" style="background-color:#B22222" onclick="remove(this)">Delete</button></div>
+    <div class="col"><button id="new" onclick="duplicate()" style="background-color:#6495ED">New</button></div>
+  </div>
+        {% endif %}
+      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+</body>
+<script>
+$(function () {
+    window.last_key = document.getElementById("annotations").childElementCount;
+})
+
+var i = 1;
+
+function remove(el) {
+    var element = el.parentElement;
+    var element2 = element.parentElement;
+    var element3 = element2.children[4].children[0];
+    {#var this_user_id = element3.textContent#}
+    var annotation_key = element2.id;
+    var user_id = "{{ user_id }}";
+    if (element3 == undefined){
+        window.this_user_id = ""
+    }
+    else {
+        window.this_user_id = element3.textContent
+    }
+
+    if (user_id  == this_user_id || this_user_id == "")
+    {
+        var e = element2.children[0].children[0].children[1].children[0];
+        var copytext = e.children[1].children[0].children[0].value;
+        var movie_name = $("#movie_name").text().trim();
+        var inputText = document.getElementById("story");
+        var innerHTML = inputText.innerHTML;
+        var index = innerHTML.indexOf(copytext);
+        if (index >= 0) {
+            innerHTML = innerHTML.substring(0, index) + "<span class='unhighlight'>" + innerHTML.substring(index, index + copytext.length) + "</span>" + innerHTML.substring(index + copytext.length);
+            inputText.innerHTML = innerHTML;
+        }
+
+        element2.remove();
+        {#console.log(copytext)#}
+        {#console.log(speaker)#}
+        {#console.log(listener)#}
+        {#console.log(movie_name)#}
+
+        $.ajax({
+            type: "GET",
+            url: "/moviescript/delete",
+            data: {
+                movie_name: movie_name,
+                annotation_key: annotation_key,
+            }
+        });
+    }
+        else{
+        alert("권한이 없습니다");
+    }
+}
+
+var popupWindow = null;
+function centeredPopup(url,winName,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+popupWindow = window.open(url,winName,settings)
+}
+
+
+document.getElementById("new").onclick = duplicate;
+
+
+var original = document.getElementById('0');
+
+function duplicate() {
+    var clone = original.cloneNode(true); // "deep" clone
+    clone.hidden = false
+    clone.id = last_key + i;// there can only be one element with an
+    ++ i;
+    original.parentNode.appendChild(clone);
+}
+
+
+
+function copytext(el) {
+    {#e.preventDefault();#}
+    {#var element = el.parentElement.parentElement.children[0].children[0].children[1].children[0].children[1].children[0].children[0]#}
+     var selectedText = '';
+
+     // window.getSelection
+     if (window.getSelection) {
+        selectedText = window.getSelection();
+    }
+    // document.getSelection
+    else if (document.getSelection) {
+        selectedText = document.getSelection();
+    }
+    // document.selection
+    else if (document.selection) {
+        selectedText =
+        document.selection.createRange().text;
+    } else return;
+    // To write the selected text into the textarea
+    {#document.testform.selectedtext.value = selectedText;#}
+    {#el.parentElement.child.value = selectedText;#}
+    el.parentElement.parentElement.children[0].children[0].children[1].children[0].children[1].children[0].children[0].value = selectedText;
+            }
+
+function saveclick(el) {
+    var element = el.parentElement.parentElement.children[3];
+    var element2 = el.parentElement.parentElement.children[4];
+    var element3 = el.parentElement.parentElement;
+    var this_user_id = element2.textContent;
+    var user_id = "{{ user_id }}";
+    var newel = document.createElement("small");
+    var newel2 = document.createElement("small");
+    var e = el.parentElement.parentElement.children[0].children[0].children[1].children[0];
+    var copytext = e.children[1].children[0].children[0].value;
+    var e1 = e.children[0].children[0];
+    var speaker = e1.options[e1.selectedIndex].text.trim();
+    var listener = e.children[2].children[0].value.trim();
+    newel.append("annotator:");
+    newel2.append("{{ user_id }}");
+    newel2.className = "highlight";
+
+    if (copytext == "" || speaker == "Character" || listener == ""){
+        alert("청자, 대사, 화자를 모두 입력해주세요.");
+    }
+
+
+
+    else if (user_id == this_user_id || this_user_id == "") {
+
+        var popup = el.children[0].children[0];
+        popup.style.visibility = "visible";
+        setTimeout(function(){popup.style.visibility = "hidden"},1000);
+
+        if (element.hasChildNodes()) {
+            element.removeChild(element.firstChild);
+        }
+        element.appendChild(newel);
+
+        if (element2.hasChildNodes()) {
+            element2.removeChild(element2.firstChild);
+        }
+        element2.appendChild(newel2);
+
+        var movie_name = $("#movie_name").text().trim();
+        var annotation_key = element3.id;
+
+        var inputText = document.getElementById("story");
+        var innerHTML = inputText.innerHTML;
+        var index = innerHTML.indexOf(copytext);
+        if (index >= 0) {
+            innerHTML = innerHTML.substring(0, index) + "<span class='highlight'>" + innerHTML.substring(index, index + copytext.length) + "</span>" + innerHTML.substring(index + copytext.length);
+            inputText.innerHTML = innerHTML;
+        }
+        $.ajax({
+            type: "GET",
+            url: "/moviescript/update",
+            data: {
+                speaker: speaker,
+                speech: copytext,
+                listener: listener,
+                movie_name: movie_name,
+                annotation_key: annotation_key,
+
+            }
+        });
+    }
+    else {
+        alert("권한이 없습니다");
+    }
+}
+
+
+</script>
+</html>

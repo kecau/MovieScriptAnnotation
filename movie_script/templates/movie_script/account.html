@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Script Annotation</title>
+
+    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+    <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
+    <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
+    <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+{#    <link rel="Stylesheet" href="{% static 'tokenizer/main.css' %}">#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+</head>
+
+
+<style>
+
+img {width:100%;}
+
+.btn-group-xs > .btn, .btn-xs {
+  padding: .25rem .4rem;
+  font-size: .875rem;
+  line-height: .5;
+  border-radius: .2rem;
+}
+
+</style>
+
+
+<script>
+function validity_check() {
+    var user_id = document.getElementById("user_id").value.trim()
+    var name = document.getElementById("name").value.trim()
+    var password1 = document.getElementById("password1").value
+    var password2 = document.getElementById("password2").value
+    var mobile = document.getElementById("mobile").value.trim()
+    var email = document.getElementById("email").value.trim()
+    var birth = document.getElementById("birth").value.trim()
+    var gender = document.getElementById("gender").value.trim()
+
+
+    var name_valid = false
+    var password1_valid = false
+    var password2_valid = false
+    var mobile_valid = false
+    var email_valid = false
+    var birth_valid = false
+    var gender_valid = false
+
+
+
+
+    // name check
+    var name_class = document.getElementById("name").classList
+    name_class.remove("is-valid", "is-invalid")
+    if (name.length < 1) {
+        document.getElementById("name_invalid").innerHTML = "이름을 입력해 주세요.";
+        name_class.add("is-invalid")
+    } else if (name.length > 100) {
+        document.getElementById("name_invalid").innerHTML = "It's too long!"
+        name_class.add("is-invalid")
+    } else {
+        name_class.add("is-valid")
+        name_valid = true
+    }
+
+    // password check
+    // password box에 readonly 속성이 없을 경우에만 check한다.
+    if ($('#password1').is('[readonly]') == false) {
+        var password1_class = document.getElementById("password1").classList
+        var password2_class = document.getElementById("password2").classList
+        password1_class.remove("is-valid", "is-invalid")
+        password2_class.remove("is-valid", "is-invalid")
+        if (/[0-9]/.test(password1) != true || /[a-zA-Z]/.test(password1) != true || password1.length < 8) {
+            document.getElementById("password1_invalid").innerHTML = "영문자, 숫자를 포함한 8자리 이상의 비밀번호를 입력해 주세요.";
+            password1_class.add("is-invalid");
+        } else if (password1 != password2) {
+            document.getElementById("password1_invalid").innerHTML = "비밀번호가 일치하지 않습니다.";
+            password1_class.add("is-invalid");
+            password2_class.add("is-invalid");
+        } else if (password1.length > 100) {
+            document.getElementById("password1_invalid").innerHTML = "It's too long!"
+            password1_class.add("is-invalid");
+            password2_class.add("is-invalid");
+        } else {
+            password1_class.add("is-valid");
+            password2_class.add("is-valid");
+            password1_valid = true
+            password2_valid = true
+        }
+    } else {
+        password1_valid = true
+        password2_valid = true
+    }
+
+    // mobile check
+    var mobile_class = document.getElementById("mobile").classList
+    mobile_class.remove("is-valid", "is-invalid")
+    if (mobile != mobile.replace(/[^0-9]/g, '')) {
+        document.getElementById("mobile_invalid").innerHTML = "전화번호는 숫자만 입력해 주세요.";
+        mobile_class.add("is-invalid")
+    } else if (mobile.length < 9) {
+        document.getElementById("mobile_invalid").innerHTML = "올바른 전화번호를 입력해 주세요.";
+        mobile_class.add("is-invalid")
+    } else if (mobile.length > 100) {
+        document.getElementById("mobile_invalid").innerHTML = "It's too long!"
+        mobile_class.add("is-invalid")
+    } else {
+        mobile_class.add("is-valid")
+        mobile_valid = true
+    }
+
+    // email check
+    var email_class = document.getElementById("email").classList
+    email_class.remove("is-valid", "is-invalid")
+    var email_regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+    if (email_regex.test(email) != true) {
+        document.getElementById("email_invalid").innerHTML = "올바른 이메일을 입력해 주세요.";
+        email_class.add("is-invalid")
+    } else if (email.length > 100) {
+        document.getElementById("email_invalid").innerHTML = "It's too long!"
+        email_class.add("is-invalid")
+    } else {
+        email_class.add("is-valid")
+        email_valid = true
+    }
+
+    // birth check
+    var birth_class = document.getElementById("birth").classList
+    birth_class.remove("is-valid", "is-invalid")
+    var birth_regex =  /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
+    if (birth_regex.test(birth) != true) {
+        document.getElementById("birth_invalid").innerHTML = "올바른 생년월일을 입력해 주세요. (ex. 19990101)";
+        birth_class.add("is-invalid")
+    } else if (birth.length > 100) {
+        document.getElementById("birth_invalid").innerHTML = "It's too long!"
+        birth_class.add("is-invalid")
+    } else {
+        birth_class.add("is-valid")
+        birth_valid = true
+    }
+
+    // gender check
+    var gender_class = document.getElementById("gender").classList
+    gender_class.remove("is-valid", "is-invalid")
+    if (gender != "남" && gender != "여") {
+        document.getElementById("gender_invalid").innerHTML = "성별을 선택해 주세요."
+        gender_class.add("is-invalid")
+    } else {
+        gender_class.add("is-valid")
+        gender_valid = true
+    }
+
+
+
+    // 모두 정상이면 submit
+    if (name_valid &&
+        password1_valid &&
+        password2_valid &&
+        mobile_valid &&
+        email_valid &&
+        birth_valid &&
+        gender_valid) {
+
+        $('#form_account').submit();
+    }
+
+
+
+};
+
+
+
+// 유저 삭제
+function delete_account() {
+
+    // name="action"인 hidden input의 value를 바꾼 뒤 submit 한다.
+    document.getElementById("action").value = "delete"
+    $('#form_account').submit();
+}
+
+</script>
+
+
+
+<body>
+
+
+
+<section class="testimonial py-5" id="testimonial">
+    <div class="container">
+        <div class="row ">
+            <div class="col py-5 border">
+                <h4 class="pb-4">Your account information</h4>
+                <form method="POST" class="needs-validation" id="form_account" novalidate>
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="user_id">User ID</label>
+                            <input type="text" id="user_id" name="user_id" class="form-control" placeholder="User ID" value="{{data.user_id}}" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" value="{{data.user_name}}" required>
+                            <div id="name_valid" class="valid-feedback">Looks good!</div>
+                            <div id="name_invalid" class="invalid-feedback">bad</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password1">Password <button id="password_edit" class="btn btn-success btn-xs rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></label>
+                            <input type="password" id="password1" name="password1" class="form-control" placeholder="Password" value="11111111" required readonly>
+                            <input type="text" id="password_is_edited" name="password_is_edited" value="false" hidden>
+                            <div id="password1_valid" class="valid-feedback">Looks good!</div>
+                            <div id="password1_invalid" class="invalid-feedback">bad</div>
+                            <script>
+                                // password edit 버튼 이벤트
+                                $('#password_edit').on("click", function(){
+                                    // password에 readonly 속성이 있을경우 readonly 속성을 제거하고 그렇지 않으면 readonly 속성을 추가하고 값을 초기화한다.
+                                    if ($('#password1').is('[readonly]') ==  true) {
+                                        $('#password1').removeAttr("readonly");
+                                        $('#password2').removeAttr("readonly");
+                                        document.getElementById("password1").value = ""
+                                        document.getElementById("password2").value = ""
+                                        document.getElementById("password_is_edited").value = "true"
+                                    } else {
+                                        $('#password1').attr("readonly", true);
+                                        $('#password2').attr("readonly", true);
+                                        document.getElementById("password1").value = "11111111"
+                                        document.getElementById("password2").value = "11111111"
+                                        document.getElementById("password_is_edited").value = "false"
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password2">&nbsp; </label>
+                            <input type="password" id="password2" name="password2" class="form-control" placeholder="Repeat Your Password" value="11111111" required readonly>
+                            <div id="password2_valid" class="valid-feedback"></div>
+                            <div id="password2_invalid" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label for="mobile">Mobile Number</label>
+                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="Mobile No." value="{{data.mobile}}" required>
+                            <div id="mobile_valid" class="valid-feedback">Looks good!</div>
+                            <div id="mobile_invalid" class="invalid-feedback">bad</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Email" value="{{data.email}}" required>
+                            <div id="email_valid" class="valid-feedback">Looks good!</div>
+                            <div id="email_invalid" class="invalid-feedback">bad</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="birth">Birth Date</label>
+                            <input type="text" id="birth" name="birth" class="form-control" placeholder="Date of birth (ex. 19990101)" value="{{data.birth}}" required>
+                            <div id="birth_valid" class="valid-feedback">Looks good!</div>
+                            <div id="birth_invalid" class="invalid-feedback">bad</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" class="form-control">
+                                <option disabled>Gender</option>
+                                <option> 남</option>
+                                <option> 여</option>
+                            </select>
+                            <script>
+                                    // 현재 선택된 gender를 {{data.gender}}로 바꾸기
+                                    var e = document.getElementById("gender");
+                                    for (i = 0; i < e.options.length; i++) {
+                                        if (e.options[i].text.trim() == '{{data.gender}}') {
+                                            e.selectedIndex = i;
+                                            break;
+                                        }
+                                        e.selectedIndex = 0;
+                                    }
+                            </script>
+                            <div id="gender_valid" class="valid-feedback">Looks good!</div>
+                            <div id="gender_invalid" class="invalid-feedback">bad</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="button" class="btn btn-danger" onclick="validity_check()">Save</button>
+                        <div class="col"><p class="text-right"><a href="javascript:void(0)" data-toggle="modal" data-target="#ModalCenter" style="font-weight: bolder;">delete account</a></p></div>
+                    </div>
+                    <input type="text" id="action" name="action" value="edit" hidden>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLongTitle">Caution</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    정말 계정을 삭제하시겠습니까?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick=delete_account()>Yes</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
