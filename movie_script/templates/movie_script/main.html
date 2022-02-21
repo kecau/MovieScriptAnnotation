@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+{% load custom_tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Script Annotation</title>
+    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+    <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
+    <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
+    <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+</head>
+<body>
+        <div class="title_Div" style="background-color:royalblue; height:100px">
+            <h1 style="text-align: center; font-size: 50px">movie script annotation</h1>
+        </div>
+        <br>
+<div class="row align-items-center">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"><b>user ID:</b> <a>{{ user_id }}</a></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+            <a href="{% url 'logout'%}" style="font-weight: bolder;">logout</a>
+            </div>
+            <div class="col"></div>
+        </div>
+        <hr>
+            <h3 style="padding-left: 5%">Movies</h3>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/8월의크리스마스.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '8월의크리스마스'%}" style="font-weight: bolder;">8월의 크리스마스</a>
+{#            <b>&nbsp;&nbsp;지윤</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/7급공무원.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '7급공무원'%}" style="font-weight: bolder;">7급공무원</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/ing.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url 'ing'%}" style="font-weight: bolder;">...ing</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/M.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url 'm'%}" style="font-weight: bolder;">M</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/YMCA야구단.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url 'ymca야구단'%}" style="font-weight: bolder;">YMCA 야구단</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가면.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가면'%}" style="font-weight: bolder;">가면</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가문의영광.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가문의영광'%}" style="font-weight: bolder;">가문의 영광</a>
+{#            <b>&nbsp;&nbsp;승훈</b>#}
+{#            <i style="color:orange;">진행중</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가위.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가위'%}" style="font-weight: bolder;">가위</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가을로.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가을로'%}" style="font-weight: bolder;">가을로</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가족.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가족'%}" style="font-weight: bolder;">가족</a>
+{#            <b>&nbsp;&nbsp;지윤</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/가족의탄생.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '가족의탄생'%}" style="font-weight: bolder;">가족의 탄생</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/각설탕.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '각설탕'%}" style="font-weight: bolder;">각설탕</a>
+{#            <b>&nbsp;&nbsp;효원</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/간신.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '간신'%}" style="font-weight: bolder;">간신</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/간첩리철진.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '간첩리철진'%}" style="font-weight: bolder;">간첩리철진</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/강원도의힘.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '강원도의힘'%}" style="font-weight: bolder;">강원도의 힘</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/강철중.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '강철중'%}" style="font-weight: bolder;">강철중: 공공의 적 1-1</a>
+{#            <b>&nbsp;&nbsp;정빈</b>#}
+{#            <i style="color:orange;">진행중</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/거룩한계보.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '거룩한계보'%}" style="font-weight: bolder;">거룩한 계보</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/거미숲.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '거미숲'%}" style="font-weight: bolder;">거미숲</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/거울속으로.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '거울속으로'%}" style="font-weight: bolder;">거울속으로</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/건축무한육면각체의비밀.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '건축무한육면각체의비밀'%}" style="font-weight: bolder;">건축무한육면각체의 비밀</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/건축학개론.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '건축학개론'%}" style="font-weight: bolder;">건축학개론</a>
+{#            <b>&nbsp;&nbsp;현주</b>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/결혼은미친짓이다.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '결혼은미친짓이다'%}" style="font-weight: bolder;">결혼은, 미친짓이다</a>
+{#            <b>&nbsp;&nbsp;희승</b>#}
+{#            <i style="color:orange;">진행중</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/고사.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '고사'%}" style="font-weight: bolder;">고사: 피의 중간고사</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/고양이를부탁해.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '고양이를부탁해'%}" style="font-weight: bolder;">고양이를 부탁해</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/고지전.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '고지전'%}" style="font-weight: bolder;">고지전</a>
+{#            <b>&nbsp;&nbsp;승훈</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/곡성.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '곡성'%}" style="font-weight: bolder;">곡성</a>
+{#            <b>&nbsp;&nbsp;건주</b>#}
+{#            <i style="color:orange;">진행중</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/공공의적.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '공공의적'%}" style="font-weight: bolder;">공공의 적</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/공공의적2.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '공공의적2'%}" style="font-weight: bolder;">공공의 적 2</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/공동경비구역JSA.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '공동경비구역JSA'%}" style="font-weight: bolder;">공동경비구역 JSA</a>
+{#            <b>&nbsp;&nbsp;세인</b>#}
+{#            <i style="color:orange;">진행중</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/광식이동생광태.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '광식이동생광태'%}" style="font-weight: bolder;">광식이 동생 광태</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/괴물.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '괴물'%}" style="font-weight: bolder;">괴물</a>
+{#            <b>&nbsp;&nbsp;지윤</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/국가대표.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '국가대표'%}" style="font-weight: bolder;">국가대표</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/국화꽃향기.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '국화꽃향기'%}" style="font-weight: bolder;">국화꽃향기</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/귀여워.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '귀여워'%}" style="font-weight: bolder;">귀여워</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/그녀를믿지마세요.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '그녀를믿지마세요'%}" style="font-weight: bolder;">그녀를 믿지 마세요</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/그놈은멋있었다.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '그놈은멋있었다'%}" style="font-weight: bolder;">그 놈은 멋있었다</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/그림자살인.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '그림자살인'%}" style="font-weight: bolder;">그림자 살인</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/그해여름.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '그해여름'%}" style="font-weight: bolder;">그 해 여름</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/극락도살인사건.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '극락도살인사건'%}" style="font-weight: bolder;">극락도 살인사건</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/꽃잎.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '꽃잎'%}" style="font-weight: bolder;">꽃잎</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/꽃피는봄이오면.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '꽃피는봄이오면'%}" style="font-weight: bolder;">꽃피는 봄이 오면</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/끝까지간다.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '끝까지간다'%}" style="font-weight: bolder;">끝까지 간다</a>
+            <b>&nbsp;&nbsp;주현</b>
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/나도아내가있었으면좋겠다.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '나도아내가있었으면좋겠다'%}" style="font-weight: bolder;">나도 아내가 있었으면 좋겠다</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/나의결혼원정기.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '나의결혼원정기'%}" style="font-weight: bolder;">나의 결혼원정기</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/남극일기.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '남극일기'%}" style="font-weight: bolder;">남극일기</a>
+{#            <b>&nbsp;&nbsp;서현</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/내깡패같은애인.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '내깡패같은애인'%}" style="font-weight: bolder;">내 깡패 같은 애인</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/내마음의풍금.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '내마음의풍금'%}" style="font-weight: bolder;">내 마음의 풍금</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/내머리속의지우개.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '내머리속의지우개'%}" style="font-weight: bolder;">내 머리 속의 지우개</a>
+{#            <b>&nbsp;&nbsp;지윤</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/내생애가장아름다운일주일.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '내생애가장아름다운일주일'%}" style="font-weight: bolder;">내 생애 가장 아름다운 일주일</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/내심장을쏴라.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '내심장을쏴라'%}" style="font-weight: bolder;">내 심장을 쏴라</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/너는내운명.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '너는내운명'%}" style="font-weight: bolder;">너는 내 운명</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/넘버3.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '넘버3'%}" style="font-weight: bolder;">넘버 3</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/누가그녀와잤을까.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '누가그녀와잤을까'%}" style="font-weight: bolder;">누가 그녀와 잤을까?</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/눈물.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '눈물'%}" style="font-weight: bolder;">눈물</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/눈에는눈이에는이.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '눈에는눈이에는이'%}" style="font-weight: bolder;">눈에는 눈 이에는 이</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/다세포소녀.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '다세포소녀'%}" style="font-weight: bolder;">다세포소녀</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/다찌마와리.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '다찌마와리'%}" style="font-weight: bolder;">다찌마와 Lee</a>
+{#            <b>&nbsp;&nbsp;승훈</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/단적비연수.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '단적비연수'%}" style="font-weight: bolder;">단적비연수</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/달마야놀자.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '달마야놀자'%}" style="font-weight: bolder;">달마야 놀자</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/달콤살벌한연인.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '달콤살벌한연인'%}" style="font-weight: bolder;">달콤, 살벌한 연인</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/달콤한인생.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '달콤한인생'%}" style="font-weight: bolder;">달콤한 인생</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/대한민국헌법제1조.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '대한민국헌법제1조'%}" style="font-weight: bolder;">대한민국 헌법 제1조</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/뜨거운것이좋아.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '뜨거운것이좋아'%}" style="font-weight: bolder;">뜨거운 것이 좋아</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/파이란.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '파이란'%}" style="font-weight: bolder;">파이란</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/마이제너레이션.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '마이제너레이션'%}" style="font-weight: bolder;">마이 제너레이션</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/여고괴담2.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '여고괴담2'%}" style="font-weight: bolder;">여고괴담 두번째 이야기</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/박하사탕.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '박하사탕'%}" style="font-weight: bolder;">박하사탕</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/수취인불명.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '수취인불명'%}" style="font-weight: bolder;">수취인불명</a>
+        </li>
+        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/싱글즈.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '싱글즈'%}" style="font-weight: bolder;">싱글즈</a>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/오수정.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '오수정'%}" style="font-weight: bolder;">오! 수정</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/올드보이.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '올드보이'%}" style="font-weight: bolder;">올드보이</a>
+{#            <b>&nbsp;&nbsp;지윤</b>#}
+{#            <i style="color:green;">완료</i>#}
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/우아한거짓말.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '우아한거짓말'%}" style="font-weight: bolder;">우아한 거짓말</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/유령.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '유령'%}" style="font-weight: bolder;">유령</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/이중간첩.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '이중간첩'%}" style="font-weight: bolder;">이중간첩</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/추격자.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '추격자'%}" style="font-weight: bolder;">추격자</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/커밍아웃.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '커밍아웃'%}" style="font-weight: bolder;">커밍 아웃</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/파란대문.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '파란대문'%}" style="font-weight: bolder;">파란대문</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/페이스.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '페이스'%}" style="font-weight: bolder;">페이스</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/하루.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '하루'%}" style="font-weight: bolder;">하루</a>
+        </li>
+        </li>        <li style="padding-left: 5%">
+            <img src="{% static "movie_script/images/행복한장의사.jpg" %}" onclick="window.open(this.src)" alt="Image1" width="63.3" height="90.7">
+            <a href="{% url '행복한장의사'%}" style="font-weight: bolder;">행복한 장의사</a>
+        </li>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructions</title>
+</head>
+<body>
+{% csrf_token %}
+<h1 style="align-content: center">Movie annotation instructions</h1>
+<br>
+<h3>어노테이션 기준</h3>
+<p>1. 유저는 반드시 영화 대본 상단에 표기된 "Main characters"의 인물들을 기준으로 모든 대사를 어노테이션한다.</p>
+<p>2. 유저는 반드시 인물의 대사만을 어노테이션 하도록 한다. (괄호안 인물의 감정이나 동적행위 등은 어노테이션에서 제외한다)</p>
+<p>3. 유저는 어노테이션 시행시 반드시 "speaker"(화자)와 "listener"(청자)를 설정하도록 한다. 이때, 화자는 "Main characters"에 해당하는 인물만 해당하고, 청자는 극중 모든 인물들이 해당된다.</p>
+<br>
+<h3>어노테이션 방법</h3>
+<p>1. "speaker"란에서 화자를 선택한다.</p>
+<p>2. 영화 대본에서 인물의 대사만 선택하여 <input value = "Load" type="button"> 버튼을 클릭하여 어노테이션 창에 로드한다. ("speech"란에서 대사수정 가능)</p>
+<p>3. "listener"란에서 청자를 명시한다. 이때, 해당 대사에 청자가 없거나 인물의 혼잣말일 경우, "self"로 표기한다. 청자가 여럿일 경우, "/"로 나누어 표기한다. (예: "철수/영희/영식")</p>
+<p>4. 화자, 대사, 청자 설정이 완료되면 <button id="save" style="background-color:#2E8B57">Save</button> 버튼을 클릭하여 어노테이션을 저장한다.</p>
+<p>5. 저장후에 어노테이션 수정이 필요한 경우, 수정후 다시 <button id="save" style="background-color:#2E8B57">Save</button> 버튼을 클릭하여 어노테이션을 다시 저장한다. (업데이트 가능)</p>
+<p>6. 새로운 어노테이션을 하기 위해 <button id="new" style="background-color:#6495ED">New</button> 버튼을 클릭하여 새로운 어노테이션창을 불러온다.</p>
+<p>7. 어노테이션이 잘못되어서 삭제가 필요할 경우, <button id="delete" style="background-color:#B22222">Delete</button> 버튼을 클릭하여 해당 어노테이션 삭제후 새로운 어노테이션창으로 다시 하도록 한다.</p>
+</body>
+</html>
